@@ -19,6 +19,7 @@ class OfferController extends GetxController {
   RxString accessToken = "".obs;
   Promo promos = Promo();
   RxList<OfferData> promoDataList = [OfferData()].obs;
+
   MainController mainController = Get.put(MainController());
   GlobalKey<FormState> addEditOfferFormKey = GlobalKey<FormState>();
   TextEditingController offerCodeController = TextEditingController();
@@ -41,6 +42,7 @@ class OfferController extends GetxController {
   RxString idType = "Image".obs;
   RxList<bool> isActiveList = List.filled(10000, false).obs;
   ImagePicker picker = ImagePicker();
+  RxList<String>? selectedCoupons = <String>[].obs;
 
   @override
   Future<void> onInit() async {
@@ -51,7 +53,7 @@ class OfferController extends GetxController {
     super.onInit();
     print("getacccc");
     print('storeID ${Constant.ecomStoreId.toString()}');
-    GetOffer(mainController.adminStore.value.id.toString());
+    // GetOffer(mainController.adminStore.value.id.toString());
     //GetOffer(accessToken.value,mainController.selectedStore.value.id!);
 
     //GetItem();
@@ -72,6 +74,7 @@ class OfferController extends GetxController {
       if (value.data!.message == "Retrieved Successfully") {
         //var result = value.data!.data!.results;
         promoDataList.value = value.data!.data!;
+
         print("CouponLength==================>>>>>>>>>>>>>>");
         print(value.data!.data!.length);
         print(promoDataList[0].code.toString());
@@ -79,6 +82,36 @@ class OfferController extends GetxController {
         update();
 
         print("addcaat");
+        isPromoLoading.value = false;
+        //   Utility.showToastSuccess("Success", value.data!.message);
+        return true;
+      } else {
+        //Utility.showToastError(value.error!.message, "Registration Failed");
+        return false;
+      }
+    }).catchError((error) {
+      Utility.hideLoadingDialog();
+      print(error);
+      printInfo(info: "Error From Controllers");
+    });
+  }
+
+  GetEcomOffer() async {
+    isPromoLoading.value = true;
+    //Utility.showLoadingDialog();
+    await promos.GetEcomPromo(
+      accessToken.value,
+    ).then((value) {
+      Utility.hideLoadingDialog();
+      print(value.data!.message);
+      if (value.data!.message == "Retrieved Successfully") {
+        //var result = value.data!.data!.results;
+        promoDataList.value = value.data!.data!;
+        print(" Get Ecom Offer -->");
+        print(value.data!.data!.length);
+        print(promoDataList[0].code.toString());
+        // parentList!.clear();
+        update();
         isPromoLoading.value = false;
         //   Utility.showToastSuccess("Success", value.data!.message);
         return true;
@@ -186,7 +219,7 @@ class OfferController extends GetxController {
       if (value.data != null) {
         print("mess");
         //  Utility.showToastSuccess("Success", value.data!.message);
-        GetOffer(Constant.isEcom == "0" ? mainController.selectedStore.value.id!.toString() : mainController.adminStore.value.id.toString());
+        Constant.isEcom == "0" ? GetOffer(mainController.selectedStore.value.id!.toString()) : GetEcomOffer();
         Get.back();
         Get.back();
 
@@ -220,7 +253,7 @@ class OfferController extends GetxController {
       print("addcaat");
       if (value.data!.message == "Promo deleted successfully") {
         print("mess");
-        GetOffer(Constant.isEcom == "0" ? mainController.selectedStore.value.id!.toString() : mainController.adminStore.value.id!.toString());
+        Constant.isEcom == "0" ? GetOffer(mainController.selectedStore.value.id!.toString()) : GetEcomOffer();
         //   Utility.showToastSuccess("Success", value.data!.message);
 
         //Get.to(InventoryPage());
@@ -264,7 +297,7 @@ class OfferController extends GetxController {
       if (value.data != null) {
         print("mess");
         //  Utility.showToastSuccess("Success", value.data!.message);
-        GetOffer(Constant.isEcom == "0" ? mainController.selectedStore.value.id!.toString() : mainController.adminStore.value.id!.toString());
+        Constant.isEcom == "0" ? GetOffer(mainController.selectedStore.value.id!.toString()) : GetEcomOffer();
         Get.back();
         Get.back();
 
@@ -299,7 +332,7 @@ class OfferController extends GetxController {
         print("mess");
         // Utility.showToastSuccess("Success", value.data!.message);
         String ownerId = "";
-        GetOffer(Constant.isEcom == "0" ? mainController.selectedStore.value.id!.toString() : mainController.adminStore.value.id!.toString());
+        Constant.isEcom == "0" ? GetOffer(mainController.selectedStore.value.id!.toString()) : GetEcomOffer();
         //Get.to(InventoryPage());
         return true;
       } else {

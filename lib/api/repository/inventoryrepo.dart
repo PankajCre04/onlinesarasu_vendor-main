@@ -273,6 +273,7 @@ class InventoryRepo {
     String isActive,
     String openTime,
     String closingTime,
+    List<String> coupons,
   ) async {
     AddProductResponse response;
     try {
@@ -292,6 +293,7 @@ class InventoryRepo {
         isActive,
         openTime,
         closingTime,
+        coupons,
       )
           .then((value) {
         print("----------------------------");

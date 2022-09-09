@@ -15,6 +15,7 @@ import 'package:sooooperbusiness/commons/constant.dart';
 import 'package:sooooperbusiness/commons/sessionmanager.dart';
 import 'package:sooooperbusiness/commons/utils.dart';
 import 'package:sooooperbusiness/controllers/maincontroller.dart';
+import 'package:sooooperbusiness/controllers/offercontroller.dart';
 import 'package:sooooperbusiness/model/more/inventory/category.dart';
 import 'package:file_picker/file_picker.dart';
 import 'package:sooooperbusiness/model/more/inventory/getcategoryresponse.dart';
@@ -89,6 +90,7 @@ class InventoryController extends GetxController {
   Rx<ProductCategoryResponse> allcategoryData = ProductCategoryResponse().obs;
   Rx<ProductCategoryResponse> productSubCategoryData = ProductCategoryResponse().obs;
   RxList<ProductCategory> subCategoryDataList = [ProductCategory()].obs;
+  OfferController offerController = Get.put(OfferController());
 
   Rx<VariantResponse> variantData = VariantResponse().obs;
   RxMap<String, dynamic> subCategoryData = {"": []}.obs;
@@ -791,23 +793,25 @@ class InventoryController extends GetxController {
     Utility.showLoadingDialog();
 
     update();
+    print("*************8${offerController.selectedCoupons!.toJson()}>>");
     Categories.AddProduct(
-      //accessToken.value,
-      Constant.isEcom == "0" ? mainController.selectedStore.value.id.toString() : mainController.adminStore.value.id.toString(),
-      selectedProductType.value,
-      productNameController.value.text,
-      productDescriptionController.value.text,
-      selectedProductImage.value,
-      selectedProductUnit.value,
-      productPriceController.value.text,
-      productSalePriceController.value.text,
-      selectedProductCategory.value,
-      productQuantityController.value.text,
-      selectedProductTag.value,
-      (isActive.value) ? "1" : "0",
-      selectedOpenTimeController.text,
-      selectedCloseTimeController.text,
-    ).then((value) {
+            //accessToken.value,
+            Constant.isEcom == "0" ? mainController.selectedStore.value.id.toString() : mainController.adminStore.value.id.toString(),
+            selectedProductType.value,
+            productNameController.value.text,
+            productDescriptionController.value.text,
+            selectedProductImage.value,
+            selectedProductUnit.value,
+            productPriceController.value.text,
+            productSalePriceController.value.text,
+            selectedProductCategory.value,
+            productQuantityController.value.text,
+            selectedProductTag.value,
+            (isActive.value) ? "1" : "0",
+            selectedOpenTimeController.text,
+            selectedCloseTimeController.text,
+            offerController.selectedCoupons!)
+        .then((value) {
       print(value);
       Utility.hideLoadingDialog();
       print("succc");

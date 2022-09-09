@@ -141,7 +141,7 @@ class Offers extends StatelessWidget {
                               children: [
                                 InkWell(
                                   onTap: () {
-                                    print("===============================>${offerController.promoDataList[index].id}");
+                                    print("===========>${offerController.promoDataList[index].id}");
                                     Get.to(AddEditOffers("Edit", offerController.promoDataList[index].id));
                                     addOfferData(index);
                                   },

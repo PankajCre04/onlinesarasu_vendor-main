@@ -143,6 +143,7 @@ class _profileState extends State<profile> {
                         inventoryController.tempItemList.clear();
                         await inventoryController.GetItem("All", 1);
                         Utility.hideLoadingDialog();
+                        offerController.GetEcomOffer();
                         Get.to(InventoryPage());
                       } else if (ProfileModel.setting[index] == "Log Out") {
                         OwnerRepo ownerRepo = OwnerRepo();
@@ -191,9 +192,11 @@ class _profileState extends State<profile> {
                       } else if (ProfileModel.setting[index] == "Discounts") {
                         print("goingOffer");
                         Get.to(Offers());
-                        (mainController.selectedStore.value.id == null || mainController.adminStore.value.id == null)
-                            ? ""
-                            : offerController.GetOffer(Constant.isEcom == "0" ? mainController.selectedStore.value.id.toString() : mainController.adminStore.value.id.toString());
+                        Constant.isEcom == "0"
+                            ? (mainController.selectedStore.value.id == null)
+                                ? ""
+                                : offerController.GetOffer(mainController.selectedStore.value.id.toString())
+                            : offerController.GetEcomOffer();
                       } else if (ProfileModel.setting[index] == "Help Center") {
                         launch('mailto:support@Localshoppi.ssdemo.xyz?subject=Help&body=Write your query to us.');
                       }

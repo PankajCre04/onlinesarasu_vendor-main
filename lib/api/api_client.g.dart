@@ -623,7 +623,8 @@ class _ApiClient implements ApiClient {
       productTag,
       isActive,
       openTime,
-      closingTime) async {
+      closingTime,
+      coupons) async {
     const _extra = <String, dynamic>{};
     final queryParameters = <String, dynamic>{};
     final _data = FormData();
@@ -644,6 +645,9 @@ class _ApiClient implements ApiClient {
     _data.fields.add(MapEntry('active', isActive));
     _data.fields.add(MapEntry('opening_time', openTime));
     _data.fields.add(MapEntry('closing_time', closingTime));
+    coupons.forEach((i) {
+      _data.fields.add(MapEntry('coupons[]', i));
+    });
     final _result = await _dio.fetch<Map<String, dynamic>>(
         _setStreamType<AddProductResponse>(
             Options(method: 'POST', headers: <String, dynamic>{}, extra: _extra)
@@ -1108,6 +1112,21 @@ class _ApiClient implements ApiClient {
         _setStreamType<GetPromoCodeResponse>(
             Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
                 .compose(_dio.options, '/api/coupons?search=store_id:$storeId',
+                    queryParameters: queryParameters, data: _data)
+                .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
+    final value = GetPromoCodeResponse.fromJson(_result.data!);
+    return value;
+  }
+
+  @override
+  Future<GetPromoCodeResponse> GetEcomPromoCode() async {
+    const _extra = <String, dynamic>{};
+    final queryParameters = <String, dynamic>{};
+    final _data = <String, dynamic>{};
+    final _result = await _dio.fetch<Map<String, dynamic>>(
+        _setStreamType<GetPromoCodeResponse>(
+            Options(method: 'GET', headers: <String, dynamic>{}, extra: _extra)
+                .compose(_dio.options, '/api/get_ecommerce_coupon',
                     queryParameters: queryParameters, data: _data)
                 .copyWith(baseUrl: baseUrl ?? _dio.options.baseUrl)));
     final value = GetPromoCodeResponse.fromJson(_result.data!);

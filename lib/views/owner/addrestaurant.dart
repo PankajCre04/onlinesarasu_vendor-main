@@ -325,13 +325,10 @@ class AddEditRestaurant extends StatelessWidget {
               Padding(
                   padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
                   child: MyTextField(
-                    controller:
-                        ownerControllers.deliveryRadiusEditingController,
+                    controller: ownerControllers.deliveryRadiusEditingController,
                     borderRadius: 10,
                     contentPadding: const EdgeInsets.fromLTRB(20, 15, 20, 15),
-                    onChanged: (value) {
-
-                    },
+                    onChanged: (value) {},
                     labelText: 'Delivery Radius',
                     borderColor: Constant.borderColor,
                     focusedBorderColor: Constant.black,
@@ -663,167 +660,141 @@ class AddEditRestaurant extends StatelessWidget {
               //     ],
               //   ),
               // ),
-              Obx(() => ownerControllers.isCategoryLoaded.value
-                  ? Padding(
-                padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
-                child: Container(
-                  width: MediaQuery.of(context).size.width * 0.95,
-                  decoration: BoxDecoration(
-                      border: Border.all(
-                          color: Constant.borderColor, width: 1.8),
-                      borderRadius:
-                      BorderRadius.all(Radius.circular(10))),
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: Column(
-                      // mainAxisAlignment: MainAxisAlignment.start,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(
-                          "Zones",
-                          style: TextStyle(fontSize: 18),
-                        ),
-                        SizedBox(
-                          height: 10,
-                        ),
-                        ownerControllers.zoneData.value.data==null?Container():Wrap(
-                          children: [
-                            for (int i = 0; i < ownerControllers.zoneData.value.data!.length; i++)
-                              Padding(
-                                padding: const EdgeInsets.only(
-                                    left: 8.0, bottom: 8),
-                                child: Obx(
-                                      () => InkWell(
-                                    onTap: () {
-                                      if(ownerControllers.selectedZoneId!.contains(ownerControllers.zoneData.value.data![i].id.toString())){
-                                        ownerControllers.selectedZoneId!.remove(ownerControllers.zoneData.value.data![i].id.toString());
-                                      }else{
-                                        ownerControllers.selectedZoneId!.add(ownerControllers.zoneData.value.data![i].id.toString());
-                                      }
-                                      print(ownerControllers.selectedZoneId!);
-                                    },
-                                    child: Container(
-                                        decoration: BoxDecoration(
-                                            color: (ownerControllers.selectedZoneId!.contains(
-                                                ownerControllers.zoneData.value.data![i].id.toString()))
-                                                ? Constant.secondaryColor.withOpacity(1)
-                                                : Colors.transparent,
-                                            border: Border.all(
-                                              color: Constant.secondaryColor.withOpacity(1),
-                                            ),
-                                            borderRadius: BorderRadius.all(Radius.circular(20))),
-                                        child: Padding(
-                                          padding:
-                                          const EdgeInsets.all(8.0),
-                                          child: Text(
-                                            ownerControllers.zoneData.value.data![i].title!,
-                                            style: TextStyle(
-                                              color: (ownerControllers.selectedZoneId!.contains(ownerControllers.zoneData.value.data![i].id.toString()))
-                                                  ? Constant.white
-                                                  : Constant.black,
-                                            ),
-                                          ),
-                                        )),
-                                  ),
-                                ),
-                              )
-                          ],
-                        )
-                      ],
-                    ),
-                  ),
-                ),
-              )
-                  : Center(
-                  child: Padding(
-                    padding: const EdgeInsets.all(15),
-                    child: Text("Loading Type...."),
-                  )),
-              ),
-              Obx(() => ownerControllers.isCategoryLoaded.value
+              Obx(
+                () => ownerControllers.isCategoryLoaded.value
                     ? Padding(
-                  padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
-                  child: Container(
-                    width: MediaQuery.of(context).size.width * 0.95,
-                    decoration: BoxDecoration(
-                        border: Border.all(
-                            color: Constant.borderColor, width: 1.8),
-                        borderRadius:
-                        BorderRadius.all(Radius.circular(10))),
-                    child: Padding(
-                      padding: const EdgeInsets.all(8.0),
-                      child: Column(
-                        // mainAxisAlignment: MainAxisAlignment.start,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            "Store Category",
-                            style: TextStyle(fontSize: 18),
-                          ),
-                          SizedBox(
-                            height: 10,
-                          ),
-                          Wrap(
-                            children: [
-                              for (int i = 0; i < ownerControllers.storeCategoryRealData.value.data!.length; i++)
-                                Padding(
-                                  padding: const EdgeInsets.only(
-                                      left: 8.0, bottom: 8),
-                                  child: Obx(
-                                        () => InkWell(
-                                      onTap: () {
-                                        if(ownerControllers.selectedCategoryId!.contains(
-                                            ownerControllers.storeCategoryRealData.value.data![i].id.toString())){
-                                          ownerControllers.selectedCategoryId!.remove(ownerControllers.storeCategoryRealData.value.data![i].id.toString());
-                                        }else{
-                                          ownerControllers.selectedCategoryId!.add(ownerControllers.storeCategoryRealData.value.data![i].id.toString());
-                                        }
-                                        print(ownerControllers.selectedCategoryId!);
-                                      },
-                                      child: Container(
-                                          decoration: BoxDecoration(
-                                              color: (ownerControllers.selectedCategoryId!.contains(
-                                                  ownerControllers.storeCategoryRealData.value.data![i].id.toString()))
-                                                  ? Constant
-                                                  .secondaryColor
-                                                  .withOpacity(1)
-                                                  : Colors.transparent,
-                                              border: Border.all(
-                                                color: Constant
-                                                    .secondaryColor
-                                                    .withOpacity(1),
+                        padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          decoration: BoxDecoration(border: Border.all(color: Constant.borderColor, width: 1.8), borderRadius: BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Zones",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                ownerControllers.zoneData.value.data == null
+                                    ? Container()
+                                    : Wrap(
+                                        children: [
+                                          for (int i = 0; i < ownerControllers.zoneData.value.data!.length; i++)
+                                            Padding(
+                                              padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+                                              child: Obx(
+                                                () => InkWell(
+                                                  onTap: () {
+                                                    if (ownerControllers.selectedZoneId!.contains(ownerControllers.zoneData.value.data![i].id.toString())) {
+                                                      ownerControllers.selectedZoneId!.remove(ownerControllers.zoneData.value.data![i].id.toString());
+                                                    } else {
+                                                      ownerControllers.selectedZoneId!.add(ownerControllers.zoneData.value.data![i].id.toString());
+                                                    }
+                                                    print(ownerControllers.selectedZoneId!);
+                                                  },
+                                                  child: Container(
+                                                      decoration: BoxDecoration(
+                                                          color: (ownerControllers.selectedZoneId!.contains(ownerControllers.zoneData.value.data![i].id.toString())) ? Constant.secondaryColor.withOpacity(1) : Colors.transparent,
+                                                          border: Border.all(
+                                                            color: Constant.secondaryColor.withOpacity(1),
+                                                          ),
+                                                          borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                      child: Padding(
+                                                        padding: const EdgeInsets.all(8.0),
+                                                        child: Text(
+                                                          ownerControllers.zoneData.value.data![i].title!,
+                                                          style: TextStyle(
+                                                            color: (ownerControllers.selectedZoneId!.contains(ownerControllers.zoneData.value.data![i].id.toString())) ? Constant.white : Constant.black,
+                                                          ),
+                                                        ),
+                                                      )),
+                                                ),
                                               ),
-                                              borderRadius:
-                                              BorderRadius.all(
-                                                  Radius.circular(
-                                                      20))),
-                                          child: Padding(
-                                            padding:
-                                            const EdgeInsets.all(8.0),
-                                            child: Text(
-                                              ownerControllers.storeCategoryRealData.value.data![i].name!,
-                                              style: TextStyle(
-                                                color: (ownerControllers.selectedCategoryId!.contains(ownerControllers.storeCategoryRealData.value.data![i].id.toString()))
-                                                    ? Constant.white
-                                                    : Constant.black,
-                                              ),
-                                            ),
-                                          )),
-                                    ),
-                                  ),
-                                )
-                            ],
-                          )
-                        ],
-                      ),
-                    ),
-                  ),
-                )
+                                            )
+                                        ],
+                                      )
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
                     : Center(
-                    child: Padding(
-                      padding: const EdgeInsets.all(15),
-                      child: Text("Loading Type...."),
-                    )),
+                        child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text("Loading Type...."),
+                      )),
+              ),
+              Obx(
+                () => ownerControllers.isCategoryLoaded.value
+                    ? Padding(
+                        padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          decoration: BoxDecoration(border: Border.all(color: Constant.borderColor, width: 1.8), borderRadius: BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Store Category",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Wrap(
+                                  children: [
+                                    for (int i = 0; i < ownerControllers.storeCategoryRealData.value.data!.length; i++)
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+                                        child: Obx(
+                                          () => InkWell(
+                                            onTap: () {
+                                              if (ownerControllers.selectedCategoryId!.contains(ownerControllers.storeCategoryRealData.value.data![i].id.toString())) {
+                                                ownerControllers.selectedCategoryId!.remove(ownerControllers.storeCategoryRealData.value.data![i].id.toString());
+                                              } else {
+                                                ownerControllers.selectedCategoryId!.add(ownerControllers.storeCategoryRealData.value.data![i].id.toString());
+                                              }
+                                              print(ownerControllers.selectedCategoryId!);
+                                            },
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: (ownerControllers.selectedCategoryId!.contains(ownerControllers.storeCategoryRealData.value.data![i].id.toString())) ? Constant.secondaryColor.withOpacity(1) : Colors.transparent,
+                                                    border: Border.all(
+                                                      color: Constant.secondaryColor.withOpacity(1),
+                                                    ),
+                                                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    ownerControllers.storeCategoryRealData.value.data![i].name!,
+                                                    style: TextStyle(
+                                                      color: (ownerControllers.selectedCategoryId!.contains(ownerControllers.storeCategoryRealData.value.data![i].id.toString())) ? Constant.white : Constant.black,
+                                                    ),
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
+                                      )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      )
+                    : Center(
+                        child: Padding(
+                        padding: const EdgeInsets.all(15),
+                        child: Text("Loading Type...."),
+                      )),
               ),
 
               // Obx(
@@ -880,11 +851,7 @@ class AddEditRestaurant extends StatelessWidget {
                         padding: const EdgeInsets.fromLTRB(15, 25, 15, 0),
                         child: Container(
                           width: MediaQuery.of(context).size.width * 0.95,
-                          decoration: BoxDecoration(
-                              border: Border.all(
-                                  color: Constant.borderColor, width: 1.8),
-                              borderRadius:
-                                  BorderRadius.all(Radius.circular(10))),
+                          decoration: BoxDecoration(border: Border.all(color: Constant.borderColor, width: 1.8), borderRadius: BorderRadius.all(Radius.circular(10))),
                           child: Padding(
                             padding: const EdgeInsets.all(8.0),
                             child: Column(
@@ -900,69 +867,27 @@ class AddEditRestaurant extends StatelessWidget {
                                 ),
                                 Wrap(
                                   children: [
-                                    for (int i = 0;
-                                        i <
-                                            ownerControllers.categoryData.value
-                                                .data!.length;
-                                        i++)
+                                    for (int i = 0; i < ownerControllers.categoryData.value.data!.length; i++)
                                       Padding(
-                                        padding: const EdgeInsets.only(
-                                            left: 8.0, bottom: 8),
+                                        padding: const EdgeInsets.only(left: 8.0, bottom: 8),
                                         child: Obx(
                                           () => InkWell(
                                             onTap: () {
-                                              ownerControllers
-                                                      .selectedStoreTypeId
-                                                      .value =
-                                                  ownerControllers.categoryData
-                                                      .value.data![i].id
-                                                      .toString();
+                                              ownerControllers.selectedStoreTypeId.value = ownerControllers.categoryData.value.data![i].id.toString();
                                             },
                                             child: Container(
                                                 decoration: BoxDecoration(
-                                                    color: (ownerControllers
-                                                                .selectedStoreTypeId
-                                                                .value ==
-                                                            ownerControllers
-                                                                .categoryData
-                                                                .value
-                                                                .data![i]
-                                                                .id
-                                                                .toString())
-                                                        ? Constant
-                                                            .secondaryColor
-                                                            .withOpacity(1)
-                                                        : Colors.transparent,
+                                                    color: (ownerControllers.selectedStoreTypeId.value == ownerControllers.categoryData.value.data![i].id.toString()) ? Constant.secondaryColor.withOpacity(1) : Colors.transparent,
                                                     border: Border.all(
-                                                      color: Constant
-                                                          .secondaryColor
-                                                          .withOpacity(1),
+                                                      color: Constant.secondaryColor.withOpacity(1),
                                                     ),
-                                                    borderRadius:
-                                                        BorderRadius.all(
-                                                            Radius.circular(
-                                                                20))),
+                                                    borderRadius: BorderRadius.all(Radius.circular(20))),
                                                 child: Padding(
-                                                  padding:
-                                                      const EdgeInsets.all(8.0),
+                                                  padding: const EdgeInsets.all(8.0),
                                                   child: Text(
-                                                    ownerControllers
-                                                        .categoryData
-                                                        .value
-                                                        .data![i]
-                                                        .name!,
+                                                    ownerControllers.categoryData.value.data![i].name!,
                                                     style: TextStyle(
-                                                      color: (ownerControllers
-                                                                  .selectedStoreTypeId
-                                                                  .value ==
-                                                              ownerControllers
-                                                                  .categoryData
-                                                                  .value
-                                                                  .data![i]
-                                                                  .id
-                                                                  .toString())
-                                                          ? Constant.white
-                                                          : Constant.black,
+                                                      color: (ownerControllers.selectedStoreTypeId.value == ownerControllers.categoryData.value.data![i].id.toString()) ? Constant.white : Constant.black,
                                                     ),
                                                   ),
                                                 )),
@@ -989,14 +914,8 @@ class AddEditRestaurant extends StatelessWidget {
                   child: MyListTile(
                     margin: EdgeInsets.all(20),
                     title: "Thumbnail Image",
-                    trailingIconData: (ownerControllers.isImageSelected.value &&
-                            ownerControllers.selectedImage != null)
-                        ? Icons.check_circle
-                        : Icons.cloud_upload,
-                    trailingColor: (ownerControllers.isImageSelected.value &&
-                            ownerControllers.selectedImage != null)
-                        ? Colors.green[700]
-                        : Colors.red,
+                    trailingIconData: (ownerControllers.isImageSelected.value && ownerControllers.selectedImage != null) ? Icons.check_circle : Icons.cloud_upload,
+                    trailingColor: (ownerControllers.isImageSelected.value && ownerControllers.selectedImage != null) ? Colors.green[700] : Colors.red,
                     onPressed: () async {
                       ownerControllers.pickImage();
                     },
@@ -1007,12 +926,10 @@ class AddEditRestaurant extends StatelessWidget {
               ),
 
               GetBuilder<OwnerControllers>(
-                builder: (getstarted) => getstarted.isImageSelected.value &&
-                        getstarted.selectedImage != null
+                builder: (getstarted) => getstarted.isImageSelected.value && getstarted.selectedImage != null
                     ? Padding(
                         padding: const EdgeInsets.fromLTRB(15, 0, 15, 0),
-                        child:
-                        Image.file(getstarted.selectedImage.value),
+                        child: Image.file(getstarted.selectedImage.value),
                       )
                     : Container(),
               ),
@@ -1126,22 +1043,21 @@ class AddEditRestaurant extends StatelessWidget {
               CustomButton(
                 title: "Save",
                 onTap: () {
-                  if(ownerControllers.selectedZoneId!.isEmpty||ownerControllers.selectedCategoryId!.isEmpty||ownerControllers.selectedStoreTypeId.isEmpty) {
+                  if (ownerControllers.selectedZoneId!.isEmpty || ownerControllers.selectedCategoryId!.isEmpty || ownerControllers.selectedStoreTypeId.isEmpty) {
                     Utility.showSingleSuccessToast("Fields cant be empty");
                   } else {
                     if (ownerControllers.addRestaurantKey.currentState!.validate()) {
                       ownerControllers.addRestaurantKey.currentState!.save();
-                      if(ownerControllers.isImageSelected.value == true){
+                      if (ownerControllers.isImageSelected.value == true) {
                         if (status == "Add") {
                           ownerControllers.addStore();
                         } else {
                           ownerControllers.editStore(storeId);
                           // ownerControllers.EditRestaurant();
                         }
-                      }else{
-                        Utility.showToastError("select all feilds","error");
+                      } else {
+                        Utility.showToastError("select all feilds", "error");
                       }
-
                     }
                   }
                 },
@@ -1154,7 +1070,7 @@ class AddEditRestaurant extends StatelessWidget {
               ),
 
               SizedBox(
-                height:100,
+                height: 100,
               ),
             ],
           ),
@@ -1166,10 +1082,7 @@ class AddEditRestaurant extends StatelessWidget {
   Future<TimeOfDay> chooseTimePicker(int type, BuildContext context) async {
     TimeOfDay _time = TimeOfDay.now();
     TimeOfDay picked;
-    picked = (await showTimePicker(
-        context: context,
-        initialTime: _time,
-        initialEntryMode: TimePickerEntryMode.input))!;
+    picked = (await showTimePicker(context: context, initialTime: _time, initialEntryMode: TimePickerEntryMode.input))!;
     print(picked);
     if (type == 0) {
       ownerControllers.openTimeEditingController.text = picked.toString();

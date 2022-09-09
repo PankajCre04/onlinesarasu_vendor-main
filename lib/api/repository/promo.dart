@@ -38,6 +38,24 @@ class Promo {
     return BaseModel()..data = response;
   }
 
+  Future<BaseModel<GetPromoCodeResponse>> GetEcomPromo(
+    String accessToken,
+  ) async {
+    print("EcomPromo");
+    print(accessToken);
+    dio!.options.headers.addAll({
+      "Authorization": "Bearer " + accessToken //"eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI2MGYyNmM2ZjQ0YjBmODAwMjAwZjMwZmIiLCJpYXQiOjE2MjY1MDAyMjAsImV4cCI6MTY4NjUwMDE2MCwidHlwZSI6ImFjY2VzcyJ9.xVIuSiuyhx2FkSwq7xPjsHQCt0gUtoLu6L1ouOqJkHw",
+    }); //accessToken});
+    GetPromoCodeResponse response;
+    try {
+      response = await apiClient!.GetEcomPromoCode();
+    } catch (error, stacktrace) {
+      print("Exception occured: $error stackTrace: $stacktrace");
+      return BaseModel()..setException(Servererror.fromJson(error));
+    }
+    return BaseModel()..data = response;
+  }
+
   Future<BaseModel<AddPromoCodeResponse>> AddOffer(
     String accessToken,
     String storeId,

@@ -8,6 +8,7 @@ import 'package:sooooperbusiness/commons/single_choice_chip.dart';
 import 'package:sooooperbusiness/commons/utils.dart';
 import 'package:sooooperbusiness/controllers/inventory/addonController.dart';
 import 'package:sooooperbusiness/controllers/inventory/inventoryController.dart';
+import 'package:sooooperbusiness/controllers/offercontroller.dart';
 import 'package:sooooperbusiness/model/more/inventory/addoncategorydata.dart';
 import 'package:sooooperbusiness/views/components/custombutton.dart';
 import 'package:sooooperbusiness/views/components/labeledcheckbox.dart';
@@ -23,6 +24,7 @@ class AddProduct extends StatelessWidget {
   AddProduct(this.status, this.id, this.index);
 
   InventoryController controller = Get.put(InventoryController());
+  OfferController offerController = Get.put(OfferController());
   final ImagePicker imgpicker = ImagePicker();
   List<XFile>? imagefiles;
   @override
@@ -842,6 +844,67 @@ class AddProduct extends StatelessWidget {
                                                     controller.productUnits[i],
                                                     style: TextStyle(
                                                       color: (controller.selectedProductUnit.value == controller.productUnits[i].toString()) ? Constant.white : Constant.black,
+                                                    ),
+                                                  ),
+                                                )),
+                                          ),
+                                        ),
+                                      )
+                                  ],
+                                )
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                      SizedBox(
+                        height: 10,
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.fromLTRB(8, 0, 8, 0),
+                        child: Container(
+                          width: MediaQuery.of(context).size.width * 0.95,
+                          decoration: BoxDecoration(border: Border.all(color: Constant.borderColor, width: 1.8), borderRadius: BorderRadius.all(Radius.circular(10))),
+                          child: Padding(
+                            padding: const EdgeInsets.all(8.0),
+                            child: Column(
+                              // mainAxisAlignment: MainAxisAlignment.start,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(
+                                  "Coupons",
+                                  style: TextStyle(fontSize: 18),
+                                ),
+                                SizedBox(
+                                  height: 10,
+                                ),
+                                Wrap(
+                                  children: [
+                                    for (int i = 0; i < offerController.promoDataList.length; i++)
+                                      Padding(
+                                        padding: const EdgeInsets.only(left: 8.0, bottom: 8),
+                                        child: Obx(
+                                          () => InkWell(
+                                            onTap: () {
+                                              if (offerController.selectedCoupons!.contains(offerController.promoDataList[i].id.toString())) {
+                                                offerController.selectedCoupons!.remove(offerController.promoDataList[i].id.toString());
+                                              } else {
+                                                offerController.selectedCoupons!.add(offerController.promoDataList[i].id.toString());
+                                              }
+                                            },
+                                            child: Container(
+                                                decoration: BoxDecoration(
+                                                    color: (offerController.selectedCoupons!.contains(offerController.promoDataList[i].id.toString()) ? Constant.secondaryColor.withOpacity(1) : Colors.transparent),
+                                                    border: Border.all(
+                                                      color: Constant.secondaryColor.withOpacity(1),
+                                                    ),
+                                                    borderRadius: BorderRadius.all(Radius.circular(20))),
+                                                child: Padding(
+                                                  padding: const EdgeInsets.all(8.0),
+                                                  child: Text(
+                                                    offerController.promoDataList[i].code.toString(),
+                                                    style: TextStyle(
+                                                      color: offerController.selectedCoupons!.contains(offerController.promoDataList[i].id.toString()) ? Constant.white : Constant.black,
                                                     ),
                                                   ),
                                                 )),

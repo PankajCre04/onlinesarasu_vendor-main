@@ -296,6 +296,7 @@ abstract class ApiClient {
     @Part(name: "active") String isActive,
     @Part(name: "opening_time") String openTime,
     @Part(name: "closing_time") String closingTime,
+    @Part(name: "coupons[]") List<String> coupons,
   );
 
   @POST(ApiRoutes.getCategory)
@@ -307,7 +308,6 @@ abstract class ApiClient {
     @Part(name: "store_id") String store_id,
     @Part(name: "parent") String parentId,
   );
-
   @GET(ApiRoutes.AddItem)
   Future<GetProductResponse> GetItem(
     @Path("storeId") String restId,
@@ -488,6 +488,9 @@ abstract class ApiClient {
   Future<GetPromoCodeResponse> GetPromoCode(
     @Path("storeId") String storeId,
   );
+
+  @GET(ApiRoutes.getEcomPromoCode)
+  Future<GetPromoCodeResponse> GetEcomPromoCode();
 
   @POST(ApiRoutes.addOffer)
   @MultiPart()

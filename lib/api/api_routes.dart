@@ -24,6 +24,7 @@ class ApiRoutes {
   static const String DeleteItem = "/restaurant/items/id/{itemId}";
   static const String DeleteCategory = "/restaurant/category/id/{categoryId}";
   static const String getPromoCode = "/api/coupons?search=store_id:{storeId}";
+  static const String getEcomPromoCode = "/api/get_ecommerce_coupon";
   static const String addOffer = "/api/coupons";
   static const String deleteOffer = "/restaurant/promo/id/{offerId}";
   static const String editOffer = "/api/coupons/{offerId}";
